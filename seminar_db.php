@@ -29,7 +29,9 @@ class Seminar_DB_Widget extends WP_Widget {
   public function update($new_instance, $old_instance) {}
     // Frontend
   public function widget($args, $instance) {
-    echo 'Seminar DB Widget!';
+    echo '<div class="widget">';
+    echo '  <h3>Seminare aus DB</h3>';
+    echo '</div>';
   }
 } // class Seminar_DB_Widget
 ?>
