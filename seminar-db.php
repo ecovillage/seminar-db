@@ -57,8 +57,6 @@ function create_seminar_db_event_post_type() {
 add_action( 'init', 'create_seminar_db_event_post_type' );
 
 /* Filter the single_template with our custom function*/
-add_filter('single_template', 'load_seminar_db_event_template');
-
 function load_seminar_db_event_template($template) {
   global $post;
 
@@ -83,7 +81,8 @@ function load_seminar_db_event_template($template) {
   // This is not an event, do nothing with $template.
   return $template;
 }
-add_filter('single_template', 'load_person_template');
+add_filter('single_template', 'load_seminar_db_event_template');
+
 
 /* readmes */
 /* dashicons: https://developer.wordpress.org/resource/dashicons/#editor-break clipboard analytics id id-alt */
