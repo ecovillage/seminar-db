@@ -41,6 +41,7 @@ function create_seminar_db_event_post_type() {
     array( 'labels' => array( 'name' => __( 'Events' ), 'singular_name' => __( 'Event' )),
            'description' => 'Events held at location',
            'public' => true,
+           'show_in_nav_menus'   => true,
            'exclude_from_search' => false,
            'publicly_queryable'  => true,
            'has_archive'         => true,
@@ -54,6 +55,35 @@ function create_seminar_db_event_post_type() {
 
 // register Custom Post Type SeminarDBEvents
 add_action( 'init', 'create_seminar_db_event_post_type' );
+
+/* Filter the single_template with our custom function*/
+add_filter('single_template', 'load_seminar_db_event_template');
+
+function load_seminar_db_event_template($template) {
+  global $post;
+
+  // Is this a "seminar_db_event" post?
+  if ($post->post_type == "seminar_db_event"){
+    $plugin_path = plugin_dir_path( __FILE__ ) . '/templates';
+
+    // The name of custom post type single template:
+    $template_name = 'single-seminar_db_event.php';
+
+    // Take template from theme if exists.
+    if($template === get_stylesheet_directory() . '/' . $template_name
+        || !file_exists($plugin_path . $template_name)) {
+
+        return $template;
+    }
+
+    // If not, return my plugin custom post type template.
+    return $plugin_path . $template_name;
+  }
+
+  // This is not an event, do nothing with $template.
+  return $template;
+}
+add_filter('single_template', 'load_person_template');
 
 /* readmes */
 /* dashicons: https://developer.wordpress.org/resource/dashicons/#editor-break clipboard analytics id id-alt */
