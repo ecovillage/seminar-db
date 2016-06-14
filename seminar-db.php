@@ -62,7 +62,7 @@ function load_seminar_db_event_template($template) {
 
   // Is this a "seminar_db_event" post?
   if ($post->post_type == "seminar_db_event"){
-    $plugin_path = plugin_dir_path( __FILE__ ) . '/templates';
+    $plugin_path = plugin_dir_path( __FILE__ ) . '/templates/';
 
     // The name of custom post type single template:
     $template_name = 'single-seminar_db_event.php';
